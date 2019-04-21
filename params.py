@@ -15,5 +15,7 @@ PLAYER_ACC = 0.8
 PLAYER_FRICTION = -0.12
 GRAVITY_ACC = 1
 
+PLATFORM_WIDTH = 20
+
 game_folder = os.path.dirname(__file__)
 img_folder = os.path.join(game_folder, "img")

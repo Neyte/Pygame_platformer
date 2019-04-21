@@ -39,8 +39,6 @@ class Player(pygame.sprite.Sprite):
         hit = self.is_on_ground()
         if hit:
             self.on_ground = True
-            # self.vel.y = 0
-            # self.pos.y = hit[0].rect.top + (hit[0].pos.y - hit[0].rect.centery)
         else:
             self.on_ground = False
 
@@ -56,7 +54,7 @@ class Player(pygame.sprite.Sprite):
             if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
                 self.acc.x = PLAYER_ACC
             # jump
-            if keys[pygame.K_SPACE] or keys[pygame.K_UP] or keys[pygame.K_d]:
+            if keys[pygame.K_SPACE] or keys[pygame.K_UP] or keys[pygame.K_w]:
                 self.jump()
 
         # apply friction
@@ -93,31 +91,17 @@ class Player(pygame.sprite.Sprite):
                 #pygame.quit();
                 break
 
-        # wrap around the sides of the screen
-        '''if self.pos.x > WIDTH:
-            self.pos.x = 0
-        if self.pos.x < 0:
-            self.pos.x = WIDTH  #'''
-
-        '''# check ground
-        cur_plat = pygame.sprite.spritecollide(self, self.game.platforms, False)
-        if cur_plat:
-            self.on_ground = True
-            self.vel.y = 0
-            self.pos.y = cur_plat[0].rect.top + (cur_plat[0].pos.y - cur_plat[0].rect.centery)'''
-
-
         screen_offset = vec(0, 0)
 
         if self.pos.x > WIDTH / 2:
             screen_offset.x = int(self.pos.x - WIDTH / 2)
-        if self.pos.x > len(self.game.lmap.level_array[0])*20 - WIDTH / 2:
+        if self.pos.x > len(self.game.lmap.level_array[0])*PLATFORM_WIDTH - WIDTH / 2:
             screen_offset.x = int(len(self.game.lmap.level_array[0])*20 - WIDTH)
 
         if self.pos.y > HEIGHT / 2:
             screen_offset.y = int(self.pos.y - HEIGHT / 2)
-        if self.pos.y > len(self.game.lmap.level_array)*20 - HEIGHT / 2:
-            screen_offset.y = int(len(self.game.lmap.level_array)*20 - HEIGHT)  #'''
+        if self.pos.y > len(self.game.lmap.level_array)*PLATFORM_WIDTH - HEIGHT / 2:
+            screen_offset.y = int(len(self.game.lmap.level_array)*PLATFORM_WIDTH - HEIGHT)  #'''
 
 
         self.rect.midbottom = self.pos - screen_offset
